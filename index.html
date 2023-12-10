@@ -1,0 +1,170 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/icon.png">
+    <title>Comic Zone</title>
+    <script src="js/jquery-1.12.0.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="css/bootstrap/js/bootstrap.js"></script>
+
+</head>
+<body>
+<header>
+    <img src="images/banner.jpg" id="banner">
+</header>
+<!--navbar not logged-->
+<nav class="navbar navbar-default notLogged">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="pull-left" href="index.html"><img src="images/newBrand.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="notLoggedCollapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="notLogged"><a href="#" data-toggle="modal" data-target="#login">Login</a></li>
+                <li class="notLogged"><a href="#" data-toggle="modal" data-target="#register">Register</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--navbar logged-->
+<nav class="navbar navbar-default logged">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="pull-left" href="index.html"><img src="images/newBrand.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="clasics.html">CLASICS</a></li>
+                <li><a href="manga.html">MANGA</a></li>
+                <li><a href="anime.html">ANIME</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown logged">
+                    <a href="#" class="dropdown-toggle" id="welcome" data-toggle="dropdown"> Welcome User<span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Profile</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" onclick="logout()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--here comes the comics-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 logged">
+            <div class="list-group">
+                <a href="#" onclick="orderBy('bestseller')" class="list-group-item">Bestseller </a>
+                <a href="#" onclick="orderBy('ranking')" class="list-group-item">Highest Ranking</a>
+                <a href="#" onclick="orderBy('searches')"  class="list-group-item">Top Searches</a>
+            </div>
+            <form onsubmit="searchComics()">
+                <div class="input-group">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search">
+                     <span class="input-group-btn">
+                         <button class="btn btn-default" type="submit">Search</button>
+                     </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-9" id="comicPlace">
+        </div>
+    </div>
+</div>
+<!--Login Modal-->
+<div class="modal fade " id="login" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Login</h4>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="return validateLogin()">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" placeholder="Username" class="form-control" id="username">
+                    </div>
+                    <div class="form-group" id="passform">
+                        <label for="passLogin">Password</label>
+                        <input type="password" placeholder="Password" class="form-control" id="passLogin">
+                    </div>
+                    <div id="errorPass" class='alert alert-danger deleted'>Incorrect password. Try again o <a
+                            href="#" data-toggle="modal" data-target="#register">register</a> an account.
+                    </div>
+                    <button type="submit" class="btn btn-default">Login</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Register Modal-->
+<div class="modal fade" id="register" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title" id="registerHeader">Register</h4>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="registerUser()">
+                    <div class="form-group">
+                        <label for="userReg">Username</label>
+                        <input type="text" placeholder="Username" class="form-control" id="userReg">
+                    </div>
+                    <div class="form-group" id="passRegister">
+                        <label for="passReg">Password</label>
+                        <input type="password" placeholder="Password" class="form-control" id="passReg">
+                    </div>
+                    <div class='alert alert-danger hide'>Incorrect password. Try again o register an account.</div>
+                    <button type="submit" class="btn btn-default">Register</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-"></div>
+        </div>
+        <p class="text-muted"> Contact us: </p>
+        <span class="glyphicon glyphicon-phone-alt"> </span><span class="text-muted"> AR: +54 11 4109 1700 | US: +1 877 215 5230</span>
+        <p class="text-muted ">&copy; Comic Zone</p>
+        <div id="social" class="col-md-2">
+            <a href="www.facebook.com" class="thumbnail col-md-3"><img src="images/face_icon.png"></a>
+            <a href="www.twiter.com" class="thumbnail col-md-3"><img src="images/twitter_icon.png"></a>
+            <a href="www.gmail.com" class="thumbnail col-md-3"><img src="images/gmail_icon.png"></a>
+        </div>
+    </div>
+</footer>
+</body>
+<script src="js/user.js"></script>
+<script src="js/comic.js"></script>
+<script src="js/init.js"></script>
+</html>
