@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /f/
+Disallow: /.well-known/
 
 Allow: /wiki/
 Allow: /img/
