@@ -1,0 +1,13 @@
+# Allow all robots to crawl all content on this domain
+User-agent: *
+Disallow: /wiki/
+Disallow: /img/
+Disallow: /f/
+Disallow: /p/
+
+# Optional: Add a crawl-delay if you prefer to limit the rate of crawling
+Crawl-delay: 10
+
+# Redirect all crawlers to the www version
+Redirect 301 / https://www.sdavidprince.space/
+
