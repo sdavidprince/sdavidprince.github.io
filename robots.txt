@@ -1,12 +1,9 @@
-# Allow all robots to crawl all content on this domain
 User-agent: *
-Disallow: /wiki/
-Disallow: /img/
 Disallow: /f/
-Disallow: /p/
+
+Allow: /wiki/
+Allow: /img/
+Allow: /p/
 
 
-
-# Redirect all crawlers to the www version
 Redirect 301 / https://www.sdavidprince.space/
-
