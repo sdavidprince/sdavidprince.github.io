@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+        var segmentCount = 0;
+        var location = window.location;
+        var href = location.href;
+        var origin = location.origin;
+        var pathname = location.pathname;
+        
+        var l = document.createElement('a');
+        l.href = origin;
+        if (l.hostname.split('.').length > segmentCount) {
+            var newPathname = pathname.replace(/^\//, '');
+            window.location.href = "https://www." + l.hostname + "/" + newPathname + location.search + location.hash;
+        }
+    </script>
+</head>
+<body>
+    <h1>Redirecting...</h1>
+    <p>If you are not redirected automatically, please <a id="redirect-link" href="#">click here</a>.</p>
+    <script>
+        document.getElementById('redirect-link').href = "https://www." + l.hostname + "/" + newPathname + location.search + location.hash;
+    </script>
+</body>
+</html>
