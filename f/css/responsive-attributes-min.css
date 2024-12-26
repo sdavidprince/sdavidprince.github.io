@@ -1,0 +1,1 @@
+t-child,[data-md*=column]>*>:first-child,[data-sm*=column]>*>:first-child{margin-top:0}[data-lg*=column]>*>:last-child,[data-md*=column]>*>:last-child,[data-sm*=column]>*>:last-child{margin-bottom:0}[data-sm~=childpad]>*,[data-sm~=pad]{padding
